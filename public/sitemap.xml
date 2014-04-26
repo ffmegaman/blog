@@ -1,20 +1,48 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://blog.ninjacorner.com/blog/2013/12/11/internships-in-japan-laugh/</loc>
+        <lastmod>2014-04-26T19:10:19+09:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://blog.ninjacorner.com/blog/2013/12/11/why-japanese-companies-cannot-expant-hint-recruitment-system/
+        </loc>
+        <lastmod>2014-04-26T19:10:24+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.ninjacorner.com/blog/2013/12/14/social-norm-dont-talk/</loc>
+        <lastmod>2014-04-26T19:10:09+09:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://blog.ninjacorner.com/blog/2013/12/20/knowledge-capital-is-leading-the-startup-revolution-in-osaka/
+        </loc>
+        <lastmod>2014-04-26T19:10:05+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.ninjacorner.com/blog/2014/01/21/addicted-to-rails/</loc>
+        <lastmod>2014-04-26T19:09:55+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.ninjacorner.com/blog/2014/04/10/ruby-ruby-ruby-js/</loc>
+        <lastmod>2014-04-26T19:08:55+09:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.ninjacorner.com/blog/2014/04/26/hello-world/</loc>
-        <lastmod>2014-04-26T16:12:21+09:00</lastmod>
+        <lastmod>2014-04-26T18:44:42+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/blog/archives/</loc>
-        <lastmod>2014-04-26T16:12:21+09:00</lastmod>
+        <lastmod>2014-04-26T19:10:24+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/</loc>
-        <lastmod>2014-04-26T16:12:21+09:00</lastmod>
+        <lastmod>2014-04-26T19:10:24+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/posts/</loc>
-        <lastmod>2014-04-26T16:12:21+09:00</lastmod>
+        <lastmod>2014-04-26T19:10:24+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/robots.txt</loc>

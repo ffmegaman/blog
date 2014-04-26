@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Philip Q Nguyen's blog]]></title>
+  <link href="http://blog.ninjacorner.com/atom.xml" rel="self"/>
+  <link href="http://blog.ninjacorner.com/"/>
+  <updated>2014-04-26T15:42:55+09:00</updated>
+  <id>http://blog.ninjacorner.com/</id>
+  <author>
+    <name><![CDATA[Philip Q Nguyen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello World]]></title>
+    <link href="http://blog.ninjacorner.com/blog/2014/04/26/hello-world/"/>
+    <updated>2014-04-26T14:50:16+09:00</updated>
+    <id>http://blog.ninjacorner.com/blog/2014/04/26/hello-world</id>
+    <content type="html"><![CDATA[<h2>Hello World</h2>
+
+<p>This is my first post to test Octopress.</p>
+
+<p>This is a code snippet:</p>
+
+<figure class='code'><figcaption><span>Testing Code Snippet</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">cute_animals</span> <span class="o">=</span> <span class="o">[]</span> <span class="c1"># An array</span>
+</span><span class='line'><span class="n">cute_animals</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;rabbits&#39;</span><span class="p">,</span> <span class="s1">&#39;dogs&#39;</span><span class="p">,</span> <span class="s1">&#39;hamsters&#39;</span> <span class="c1"># Appending to array</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+</feed>

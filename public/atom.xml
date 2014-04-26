@@ -4,7 +4,7 @@
   <title><![CDATA[Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-04-26T19:10:24+09:00</updated>
+  <updated>2014-04-26T20:33:45+09:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -14,20 +14,79 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Moved to Octopress on Dokku!]]></title>
+    <link href="http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress/"/>
+    <updated>2014-04-26T20:10:41+09:00</updated>
+    <id>http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress</id>
+    <content type="html"><![CDATA[<p>So I have moved away from Wordpress and now on the hacker-friendly Octopress running on the mini-Heroku, Dokku. I also changed host from Godaddy to DigitalOcean, and there is definitely a speed increase with their SSDs.</p>
+
+<p>Immediately, I experienced an issue on my first push of Octopress to Dokku. When I tried to view the blog on my browser, I recieved a Nginx gateway error. That was easily fixed however by ensuring that <code>gem 'thin'</code> is in the gemfile. After that, I just ran bundle install, git commit, and pushed it up to dokku and all was fine.</p>
+
+<p>Here is what my gemfile looks like now</p>
+
+<figure class='code'><figcaption><span>My Octopress Blog&#8217;s Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;rake&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.9&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;jekyll&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.12&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rdiscount&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.0.7&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;pygments.rb&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.3.4&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;RedCloth&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 4.2.9&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;haml&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 3.1.7&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;compass&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.12.2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sass&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 3.2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sass-globbing&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.0.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rubypants&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.2.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rb-fsevent&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.9&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;stringex&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.4.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;liquid&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.3.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;directory_watcher&#39;</span><span class="p">,</span> <span class="s1">&#39;1.4.1&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;thin&#39;</span> <span class="c1"># Add this to your gemfile</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sinatra&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.4.2&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Hello World]]></title>
     <link href="http://blog.ninjacorner.com/blog/2014/04/26/hello-world/"/>
     <updated>2014-04-26T14:50:16+09:00</updated>
     <id>http://blog.ninjacorner.com/blog/2014/04/26/hello-world</id>
-    <content type="html"><![CDATA[<h2 id='my_first_post'>My first post!</h2>
+    <content type="html"><![CDATA[<h2>My first post!</h2>
 
 <p>This is my first post to test Octopress.</p>
 
 <p>This is a code snippet:</p>
-<figure class='code'><figcaption><span>Testing Code Snippet</span></figcaption><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'><figcaption><span>Testing Code Snippet</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class='n'>cute_animals</span> <span class='o'>=</span> <span class='o'>[]</span> <span class='c1'># An array</span>
-</span><span class='line'><span class='n'>cute_animals</span> <span class='o'>&lt;&lt;</span> <span class='s1'>&#39;rabbits&#39;</span><span class='p'>,</span> <span class='s1'>&#39;dogs&#39;</span><span class='p'>,</span> <span class='s1'>&#39;hamsters&#39;</span> <span class='c1'># Appending to array</span>
-</span></code></pre></td></tr></table></div></figure>]]></content>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">cute_animals</span> <span class="o">=</span> <span class="o">[]</span> <span class="c1"># An array</span>
+</span><span class='line'><span class="n">cute_animals</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;rabbits&#39;</span><span class="p">,</span> <span class="s1">&#39;dogs&#39;</span><span class="p">,</span> <span class="s1">&#39;hamsters&#39;</span> <span class="c1"># Appending to array</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
   </entry>
   
   <entry>
@@ -36,24 +95,23 @@
     <updated>2014-04-10T18:20:52+09:00</updated>
     <id>http://blog.ninjacorner.com/blog/2014/04/10/ruby-ruby-ruby-js</id>
     <content type="html"><![CDATA[<p>In mid February, I took on a project to develop a web portal for the company I was interning at, Asterism Healthcare Plus. This would be my first work on a real project rather than tutorial projects, I did warn them of course, but due to budget constraint they let me work on it. I was paired up with another guy, Laurent Safa, who wasn’t part of Asterism, but was paid to consult and manage the database for Asterism. Unlike me, Laurent was well experienced in web development, and being paired up with him meant that I would learn a ton.</p>
+
 <!--more-->
+
+
+<p></p>
+
 <p>Indeed, a month and a half later, I have finished my internship with a nice looking web portal to show. The portal has an Admin and Employees only page where they can view information on customers and products. Customers can also log into the portal to view their product’s current status as well as post comments on any issues. During this development, I honed my ruby skills, and now I am quite comfortable with ruby and not just rails. I started to use some jQuery and JavaScript as well for this project, I am still not quite an expert on that, but I am now making JavaScript my new priority to learn.</p>
 
 <p>What’s my plan now? There are three things:</p>
 
 <ul>
-<li>
-<p>-Learn JavaScript over the next couple of weeks</p>
-</li>
+<li><p>-Learn JavaScript over the next couple of weeks</p></li>
+<li><p>-Migrate this website from a WordPress site on Godaddy to a rails site possibly on Digital Ocean.</p></li>
+<li><p>-Graduate from the MBA program over the next few months and land a job in a tech company in the bay area.</p></li>
+</ul>
 
-<li>
-<p>-Migrate this website from a WordPress site on Godaddy to a rails site possibly on Digital Ocean.</p>
-</li>
-
-<li>
-<p>-Graduate from the MBA program over the next few months and land a job in a tech company in the bay area.</p>
-</li>
-</ul>]]></content>
+]]></content>
   </entry>
   
   <entry>
@@ -63,21 +121,30 @@
     <id>http://blog.ninjacorner.com/blog/2014/01/21/addicted-to-rails</id>
     <content type="html"><![CDATA[<p>In the summer of 2013, I started to question the value of my MBA. I mean, what can I DO with it? What can I BUILD with it? To correct this situation, I decided to take a deep dive into the world of computer programming.</p>
 
-<p>I started with Codecademy. More specifically I took their python course, and well I managed to get about 3/4 of the way through, I couldn’t understand how I could BUILD anything with it.</p>
-<figure class='code'><figcaption><span /></figcaption><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<p>I started with Codecademy. More specifically I took their python course, and well I managed to get about &frac34; of the way through, I couldn’t understand how I could BUILD anything with it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class='n'>cool_variable</span> <span class='o'>=</span> <span class='n'>cool_stuff</span>
-</span><span class='line'><span class='n'>cool_variable</span>
-</span><span class='line'><span class='c1'># =&gt; cool_stuff</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">cool_variable</span> <span class="o">=</span> <span class="n">cool_stuff</span>
+</span><span class='line'><span class="n">cool_variable</span>
+</span><span class='line'><span class="c1"># =&gt; cool_stuff</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>That’s about all I learned on the Python course in Codecademy. So I stopped. I realized I wasted my time.</p>
+
+
+<p>That’s about all I learned on the Python course in Codecademy.  So I stopped. I realized I wasted my time.</p>
 
 <p>Then in September, I saw an ad on Facebook called “Onemonthrails.” I clicked on it (the only Facebook ad I ever clicked on purpose) and the next thing I knew, I paid $40 (now it’s about $100) to get access into an online video course that promised to make me a web app developer in one month! Well they lied. I made a web app in 1 and a half weeks! I blazed through the course every night without fail (all while doing my MBA classes during the day). Before I knew it, I was hooked.</p>
+
 <!--more-->
+
+
+<p></p>
+
 <p>After finishing Onemonthrails, I spent the next month or two trying to develop a web app similar to Eventbrite. That’s when I realized that I have a lot to learn still. Countless times was I frustrated at mistakes I made and I would spend hours searching for the issue. I also realized another BIG problem. While I understood how to make the app at a 30,000 feet level, I didn’t understand it at a lower level, say 10,000 feet or 1,000 feet. I mean, just how exactly does the Model, View, and Controller work together? Why is it that when I type “rails generate scaffold Somethingcool” that all of a sudden all these files appeared in my app directory? I realized I needed to learn more about Rails.</p>
 
-<p>Enter January 2014, I was busy preparing for my finals in the weeks coming, and I had just received an internship for a startup in Kobe, Japan. That’s also when I decided to get a copy of Michael Hartl’s Ruby on Rails Tutorial. It’s been two weeks since, and I have been steadily going through it. Managed to get about 3/4 of the way through the book so far and all I can say is that this book is truly gold for aspiring web developers. It has also cemented my desires for more Rails.</p>]]></content>
+<p>Enter January 2014, I was busy preparing for my finals in the weeks coming, and I had just received an internship for a startup in Kobe, Japan. That’s also when I decided to get a copy of Michael Hartl’s Ruby on Rails Tutorial. It’s been two weeks since, and I have been steadily going through it. Managed to get about &frac34; of the way through the book so far and all I can say is that this book is truly gold for aspiring web developers. It has also cemented my desires for more Rails.</p>
+]]></content>
   </entry>
   
   <entry>
@@ -85,16 +152,23 @@
     <link href="http://blog.ninjacorner.com/blog/2013/12/20/knowledge-capital-is-leading-the-startup-revolution-in-osaka/"/>
     <updated>2013-12-20T18:55:25+09:00</updated>
     <id>http://blog.ninjacorner.com/blog/2013/12/20/knowledge-capital-is-leading-the-startup-revolution-in-osaka</id>
-    <content type="html"><![CDATA[<img class='left' src='http://blog.ninjacorner.com/images/knowledge-salon.jpg' title='Working in Knowledge Salon' />
+    <content type="html"><![CDATA[<p><img class="left" src="http://blog.ninjacorner.com/images/knowledge-salon.jpg" title="Working in Knowledge Salon" ></p>
+
 <p>What a small world. A few days ago I had lunch with Arthur Matsumoto, former SVP of Panasonic America and now part of an angel group with extensive connections in Hong Kong. I intended to ask him more about the startups that he is working with. Little did I know that he is also involved with the creation of Knowledge Capital, the organization that is running the Knowledge Salon, a large co-working and incubation space in the new Grand Front Osaka complex. Which so happens that I have a membership myself and often go there.</p>
+
 <!--more-->
-<p>According to Arthur, what he hopes to accomplish with Knowledge Capital is to create a strong connection between entrepreneurs in Osaka and Hong Kong in order to exchange knowledge and form new startups. Startup teams are being sent through exchanges between the two locations, with Grand Front Osaka being the base here in Japan and the Hong Kong Science and Technology Park being the other in Hong Kong.</p>
+
+
+<p></p>
+
+<p>According to Arthur, what he hopes to accomplish with Knowledge Capital is to create a strong connection between entrepreneurs in Osaka and Hong Kong in order to exchange knowledge and form new startups.  Startup teams are being sent through exchanges between the two locations, with Grand Front Osaka being the base here in Japan and the Hong Kong Science and Technology Park being the other in Hong Kong.</p>
 
 <p>There are 2.5 million people who goes through Osaka every day, so naturally most would think that new ideas would constantly be shared and startups being formed. However, that is not the case. People simply do not talk to each other, and this is related to the culture. Knowledge Capital hopes to reverse this cultural issue and encourage the sharing of ideas.</p>
 
 <p>Yet, nearly a year now since the opening of the Grant Front Osaka and the admission of members into the co-working space, people still are not talking to each other. This is a problem that Arthur admitted and I have observed when going there myself. There are lots of people going there to work, some individually, and some with their teams. However, there are no conversation between people outside of those they came with. Even the conversations to themselves are kept at a very low voice almost as if it is a library.</p>
 
-<p>Nonetheless, at any given day in the Knowledge Salon, there are dozens of startups there working on their next big ideas. Here’s to the future of Osaka.</p>]]></content>
+<p>Nonetheless, at any given day in the Knowledge Salon, there are dozens of startups there working on their next big ideas. Here’s to the future of Osaka.</p>
+]]></content>
   </entry>
   
   <entry>
@@ -103,28 +177,40 @@
     <updated>2013-12-14T19:01:33+09:00</updated>
     <id>http://blog.ninjacorner.com/blog/2013/12/14/social-norm-dont-talk</id>
     <content type="html"><![CDATA[<p>One thing that I really miss about home is the ability to stand next to a stranger and say “Hi, how are you?” and start a conversation. You cannot find that here in Japan. Standing next to a stranger in Japan and saying “Genki desuka?” (equivalent of how are you) is just socially awkward. Of course it’s not all that bad, sometimes it’s really nice to commute on the train or bus in absolute silence. Imagine a packed train in Osaka with everyone speaking at once. if you are part of the conversation than that would be fun, but if you are trying to finish reading a chapter before the end of your commute then you might as well throw that book at someone’s face.</p>
+
 <!--more-->
+
+
+<p></p>
+
 <p>I’m not quite sure where I stand on this matter. Truthfully I miss random conversations, but occasionally when I see people talking loudly on the train, I glare at them and beam a “shut up I’m trying to read, don’t you know its against social norms to be having fun on the train!?” Nonetheless, 99% of the commuters just sit quietly reading a book or playing games on their smart phones.</p>
 
 <p>Since the social norm in Japan is to not speak to strangers in public, strange situations happen when suddenly two strangers bump into each other. For example, many times people bump into me, and sometimes pretty hard at the train station. Rarely do they say “sumimasen” (sorry/excuse me). It’s not because they are being rude, but because social norms dictate that they shouldn’t speak. Of course sometimes my American side comes in and I just want to yell out “SAY SORRY TO ME!”</p>
 
-<p>It’s also interesting to see people trying to communicate with strangers on the train without actually speaking. For example, a person sitting down may try to make himself/herself smaller by scooting closer to the side in an effort to send a “you can sit next to me” signal to a nearby standing person. There is no verbal communication between both sides, and it’s up to the standing person to notice the invitation, and whether he or she accepts to sit down. Oh and there is absolutely no eye contact, usually both are just staring down at the ground.</p>]]></content>
+<p>It’s also interesting to see people trying to communicate with strangers on the train without actually speaking. For example, a person sitting down may try to make himself/herself smaller by scooting closer to the side in an effort to send a “you can sit next to me” signal to a nearby standing person. There is no verbal communication between both sides, and it’s up to the standing person to notice the invitation, and whether he or she accepts to sit down. Oh and there is absolutely no eye contact, usually both are just staring down at the ground.</p>
+]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Why Japanese Companies Cannot Expant (Hint: Recruitment System)]]></title>
-    <link href="http://blog.ninjacorner.com/blog/2013/12/11/why-japanese-companies-cannot-expant-hint-recruitment-system/"/>
+    <title type="html"><![CDATA[Why Japanese Companies Cannot Expand (Hint: Recruitment System)]]></title>
+    <link href="http://blog.ninjacorner.com/blog/2013/12/11/why-japanese-companies-cannot-expand-hint-recruitment-system/"/>
     <updated>2013-12-11T19:05:53+09:00</updated>
-    <id>http://blog.ninjacorner.com/blog/2013/12/11/why-japanese-companies-cannot-expant-hint-recruitment-system</id>
+    <id>http://blog.ninjacorner.com/blog/2013/12/11/why-japanese-companies-cannot-expand-hint-recruitment-system</id>
     <content type="html"><![CDATA[<p>Japan’s economy over the past 23 years can be described with words like “shrunk,” “stalled,” or “deflated.” The reason is simple, Japanese companies have an inability to target customers beyond those who speaks Japanese. While there are many growing opportunities in the world, Japanese companies continue to fail in grabbing those opportunities. So how can these companies expand beyond their borders? First they need to start recruiting educated foreign employees who can speak multiple languages and understand foreign cultures. However, the current recruiting system is so structured that it is nearly impossible for foreign citizens living inside or outside Japan to participate in.</p>
+
 <!--more-->
+
+
+<p></p>
+
 <p>Job hunting in Japan, known as shushoku katsudo (就職活動), formally starts December 1st of each year for students who are within two years of graduating university. However, students have already begun going to company hosted seminars and even taking an intelligence test (required by many companies) well before the formal start date. On December 1st, all Japanese companies starts hosting interviews, sometimes in groups or individually, over the course of several months. Candidates are expected to go through multiple rounds from five to as much as a dozen interviews (yes for one company). As candidates pass each round, they go up to be interviewed by a higher authority, and many times even interviewed by the CEO or members of the board of directors (yes, for entry level positions). So you can imagine the numbers of interviews and preparations a third year university student has to go through as she or he applies for multiple companies. During this period, most students skip their studies and classes, as they go through almost daily interviews.</p>
 
 <p>If you are a foreigner and do not speak perfect Japanese, it would be double difficult to comprehend the system and land a job. If you live outside of Japan, well most likely you will miss the entire recruiting process. The system has so many barriers for a foreigner to enter.</p>
 
 <p>Yet at this dire time in the Japanese economy, foreign employees are just what they need. The population of Japan is shrinking at an alarming rate, and Japan needs educated foreign workers to replace unoccupied positions, and help expand beyond their domestic borders.</p>
 
-<p>Japanese companies need to start implementing a foreigner friendly recruiting system. One possible method is an internship program for foreign students. A second method is to start recruiting mid-career foreigners who have a high degree of knowledge in specific fields. However many Japanese companies don’t even recruit other mid-career Japanese, so it’s difficult to see them start now. Though, some companies are slowly changing to these new ideas, it will be at least another decade before real change can be seen.</p>]]></content>
+<p>Japanese companies need to start implementing a foreigner friendly recruiting system. One possible method is an internship program for foreign students. A second method is to start recruiting mid-career foreigners who have a high degree of knowledge in specific fields. However many Japanese companies don’t even recruit other mid-career Japanese, so it’s difficult to see them start now. Though, some companies are slowly changing to these new ideas, it will be at least another decade before real change can be seen.</p>
+]]></content>
   </entry>
   
   <entry>
@@ -133,7 +219,12 @@
     <updated>2013-12-11T19:03:05+09:00</updated>
     <id>http://blog.ninjacorner.com/blog/2013/12/11/internships-in-japan-laugh</id>
     <content type="html"><![CDATA[<p>One of my close friend recently started a two week internship in Osaka. Her day to day responsibilities? Clean desks and make coffee. Hardly productive and educational for students. However she was one of the lucky ones, why? Because most Japanese companies do not know what an internship is, and if they do have an internship program, it is for two to three days.</p>
+
 <!--more-->
+
+
+<p></p>
+
 <p>Two weeks ago, an ACCJ (American Chambers of Commerce in Japan) held a conference in Osaka discussing the necessities for Japanese companies to implement western style internships. The reality is that Japanese companies hardly offer internships and this is tied to their corporate culture being a limiting factor. The sempai-kohai (senior-junior) relationship of work style is the ultimate culprit. If you hire an intern, where do you put the intern into the sempai-kohai hierarchy?</p>
 
 <p>When Japanese graduate from university and enter their respective companies, they are placed in their first year class. This first year class usually involves working in the manufacturing floor (if a manufacturing company) or going to customers’ houses and greeting them (if a service company). As they age each year, the class of employees would go up one level (for example, moving from the manufacturing floor to the the copy room). See the problem?</p>
@@ -142,7 +233,8 @@
 
 <p>In recent years some companies started to offer “internships.” However, these companies are using it unproductively as a way for students to observe the company. Most “internships” would last two to three days, and students are given a tour and explanation about some of the work being done in a specific office.</p>
 
-<p>So implementing a full fledge internship program in Japan would require a complete overhaul of the recruiting system and overhaul of the sempai-kohai relationship system prevalent in the corporate culture here. That’s a big task, and not one that will happen soon.</p>]]></content>
+<p>So implementing a full fledge internship program in Japan would require a complete overhaul of the recruiting system and overhaul of the sempai-kohai relationship system prevalent in the corporate culture here. That’s a big task, and not one that will happen soon.</p>
+]]></content>
   </entry>
   
 </feed>

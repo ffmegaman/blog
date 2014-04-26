@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Why Japanese companies cannot expant (Hint: recruitment system)"
+title: "Why Japanese companies cannot expand (Hint: recruitment system)"
 date: 2013-12-11 19:05:53 +0900
 comments: true
 categories: 

@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Moved to Octopress on Dokku! - Philip Q Nguyen's blog</title>
+  <meta name="author" content="Philip Q Nguyen">
+
+  
+  <meta name="description" content="Moved to Octopress on Dokku! written Apr 26th, 2014 in jekyll, octopress,, ruby, So I have moved away from Wordpress and now on the hacker-friendly &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Philip Q Nguyen's blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Moved to Octopress on Dokku!</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-26T20:10:41+09:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jekyll/'>jekyll</a>, <a class='category' href='/blog/categories/octopress/'>octopress,</a>, <a class='category' href='/blog/categories/ruby/'>ruby,</a>
+  
+</span>
+
+
+        </div>
+        <p>So I have moved away from Wordpress and now on the hacker-friendly Octopress running on the mini-Heroku, Dokku. I also changed host from Godaddy to DigitalOcean, and there is definitely a speed increase with their SSDs.</p>
+
+<p>Immediately, I experienced an issue on my first push of Octopress to Dokku. When I tried to view the blog on my browser, I recieved a Nginx gateway error. That was easily fixed however by ensuring that <code>gem 'thin'</code> is in the gemfile. After that, I just ran bundle install, git commit, and pushed it up to dokku and all was fine.</p>
+
+<p>Here is what my gemfile looks like now</p>
+
+<figure class='code'><figcaption><span>My Octopress Blog&#8217;s Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;rake&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.9&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;jekyll&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.12&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rdiscount&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.0.7&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;pygments.rb&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.3.4&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;RedCloth&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 4.2.9&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;haml&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 3.1.7&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;compass&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.12.2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sass&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 3.2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sass-globbing&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.0.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rubypants&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.2.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rb-fsevent&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.9&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;stringex&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.4.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;liquid&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.3.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;directory_watcher&#39;</span><span class="p">,</span> <span class="s1">&#39;1.4.1&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;thin&#39;</span> <span class="c1"># Add this to your gemfile</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sinatra&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.4.2&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/04/26/hello-world/" title="Previous Post: Hello World">&laquo; Previous: Hello World</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/philipqnguyen"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/ffmegaman"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Copyright 2014 by Philip Q Nguyen and Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -7,7 +7,7 @@ title: Philip Q Nguyen's blog
 subtitle: New Ruby on Rails Developer and Fan of East Asia
 author: Philip Q Nguyen
 simple_search: https://www.google.com/search
-description: Philip Q Nguyen Ruby Rails Developer Japan Asia Traveler
+description: 'I am a web app developer with knowledge in Ruby/Rails, JavaScript/jQuery, HTML, and CSS. I recently started learning development in September 2013 while I was (and still am) a graduate business student in Osaka, Japan. This is where I will rant about my journey becoming a web app developer as well as things related to my interest in East Asia'
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -97,4 +97,4 @@ disqus_show_comment_count: false
 google_analytics_tracking_id:
 
 # Facebook Like
-facebook_like: false
+facebook_like: true

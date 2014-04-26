@@ -6,7 +6,7 @@ comments: true
 categories: 'Uncategorized'
 ---
 
-## Hello World
+## My first post!
 
 This is my first post to test Octopress.
 

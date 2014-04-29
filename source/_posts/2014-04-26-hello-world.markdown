@@ -6,13 +6,15 @@ comments: true
 categories: 'Uncategorized'
 ---
 
-## My first post!
+## My first post with Octopress!!
 
 This is my first post to test Octopress.
 
-This is a code snippet:
+This is a code snippet (just to test):
 
 ``` ruby Testing Code Snippet
 cute_animals = [] # An array
 cute_animals << 'rabbits', 'dogs', 'hamsters' # Appending to array
 ```
+
+Awesome. I am really liking Octopress. Time to migrate my old posts here.

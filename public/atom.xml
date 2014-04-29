@@ -4,7 +4,7 @@
   <title><![CDATA[Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-04-26T20:33:45+09:00</updated>
+  <updated>2014-04-29T22:15:17+09:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -74,11 +74,11 @@
     <link href="http://blog.ninjacorner.com/blog/2014/04/26/hello-world/"/>
     <updated>2014-04-26T14:50:16+09:00</updated>
     <id>http://blog.ninjacorner.com/blog/2014/04/26/hello-world</id>
-    <content type="html"><![CDATA[<h2>My first post!</h2>
+    <content type="html"><![CDATA[<h2>My first post with Octopress!!</h2>
 
 <p>This is my first post to test Octopress.</p>
 
-<p>This is a code snippet:</p>
+<p>This is a code snippet (just to test):</p>
 
 <figure class='code'><figcaption><span>Testing Code Snippet</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -86,6 +86,8 @@
 </span><span class='line'><span class="n">cute_animals</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;rabbits&#39;</span><span class="p">,</span> <span class="s1">&#39;dogs&#39;</span><span class="p">,</span> <span class="s1">&#39;hamsters&#39;</span> <span class="c1"># Appending to array</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>Awesome. I am really liking Octopress. Time to migrate my old posts here.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Uncategorized | Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/blog/categories/uncategorized/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-04-26T20:33:45+09:00</updated>
+  <updated>2014-04-29T22:15:17+09:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -18,16 +18,18 @@
     <link href="http://blog.ninjacorner.com/blog/2014/04/26/hello-world/"/>
     <updated>2014-04-26T14:50:16+09:00</updated>
     <id>http://blog.ninjacorner.com/blog/2014/04/26/hello-world</id>
-    <content type="html"><![CDATA[<h2>My first post!</h2>
+    <content type="html"><![CDATA[<h2>My first post with Octopress!!</h2>
 
 <p>This is my first post to test Octopress.</p>
 
-<p>This is a code snippet:</p>
+<p>This is a code snippet (just to test):</p>
 
 <p><code>ruby Testing Code Snippet
 cute_animals = [] # An array
 cute_animals &lt;&lt; 'rabbits', 'dogs', 'hamsters' # Appending to array
 </code></p>
+
+<p>Awesome. I am really liking Octopress. Time to migrate my old posts here.</p>
 ]]></content>
   </entry>
   

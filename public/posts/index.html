@@ -13,7 +13,7 @@
   <meta name="author" content="Philip Q Nguyen">
 
   
-  <meta name="description" content="All Posts Moved to Octopress on Dokku! So I have moved away from Wordpress and now on the hacker-friendly Octopress running on the mini-Heroku, &hellip;">
+  <meta name="description" content="All Posts Tutorial: Incorporating Gridster to a Rails 4 App Intro Gridster, by Ducksboard, is a jQuery library for building drag and drop items in a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,6 +50,59 @@
 
   <div class="article-list">
     <div class="container">
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/blog/2014/05/07/tutorial-incorporating-gridster-to-a-rails-4-app/">Tutorial: Incorporating Gridster to a Rails 4 App</a></h2>
+  
+  <p>
+    <h3>Intro</h3>
+
+
+
+
+<p>Gridster, by Ducksboard, is a jQuery library for building drag and drop items in a grid layout. You can use it drag listed elements anywhere in the defined grid.</p>
+
+
+
+
+<h3>Ensure proper configuration</h3>
+
+
+
+
+<p><p>Before we begin, first we need to ensure that jQuery will work properly in Rails 4. Rails 4 by default has the <code>gem &lsquo;turbolinks&rsquo;</code> in the gemfile, which will enhance your app&rsquo;s loading speed by refreshing only the contents in the <code>&lt;body&gt;</code> of your html files, but it may screw up some jQuery scripts. To fix this, include <code>gem &lsquo;jquery-turbolinks&rsquo;</code> which will allow your jQuery scripts to fire up properly. After adding the <code>gem &lsquo;jquery-rails&rsquo;</code> to your gemfile, be sure to add <code>//= require jquery.turbolinks</code> just after <code>//= require jquery</code> to application.js and move <code>//= require turbolinks</code> to the very bottom of the list. Don&rsquo;t forget to perform bundle install. Now lets move on to the actual implementation.</p>
+
+  </p>
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-05-07T02:42:05+09:00" pubdate data-updated="true">May 7<span>th</span>, 2014</time> 
+    
+
+
+  </span>
+
+  
+    <a class="full-article-link pull-right" rel="full-article" href="/blog/2014/05/07/tutorial-incorporating-gridster-to-a-rails-4-app/">Read on &rarr;</a>
+  
+</article>
+
+        </div>
+      </div>
       
       
       <div class="row">

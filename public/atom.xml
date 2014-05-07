@@ -4,7 +4,7 @@
   <title><![CDATA[Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-05-07T03:37:05+09:00</updated>
+  <updated>2014-05-07T12:14:03+09:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -24,7 +24,7 @@
 
 <h3>Ensure proper configuration</h3>
 
-<p>Before we begin, first we need to ensure that jQuery will work properly in Rails 4. Rails 4 by default has the <code>gem 'turbolinks'</code> in the gemfile, which will enhance your app&rsquo;s loading speed by refreshing only the contents in the <code>&lt;body&gt;</code> of your html files, but it may screw up some jQuery scripts. To fix this, include <code>gem 'jquery-turbolinks'</code> which will allow your jQuery scripts to fire up properly. After adding the <code>gem 'jquery-rails'</code> to your gemfile, be sure to add <code>//= require jquery.turbolinks</code> just after <code>//= require jquery</code> to application.js and move <code>//= require turbolinks</code> to the very bottom of the list. Don&rsquo;t forget to perform bundle install. Now lets move on to the actual implementation.<!-- more --></p>
+<p>Before we begin, first we need to ensure that jQuery will work properly in Rails 4. Rails 4 by default has the <code>gem 'turbolinks'</code> in the gemfile, which will enhance your app&rsquo;s loading speed by refreshing only the contents in the <code>&lt;body&gt;</code> of your html files, but it may screw up some jQuery scripts. To fix this, include <code>gem 'jquery-turbolinks'</code> which will allow your jQuery scripts to fire up properly. After adding the <code>gem 'jquery-turbolinks'</code> to your gemfile, be sure to add <code>//= require jquery.turbolinks</code> just after <code>//= require jquery</code> to application.js and move <code>//= require turbolinks</code> to the very bottom of the list. Don&rsquo;t forget to perform bundle install. Now lets move on to the actual implementation.<!-- more --></p>
 
 <h3>Lets add Gridster to our app!</h3>
 

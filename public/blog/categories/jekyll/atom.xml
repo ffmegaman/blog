@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jekyll | Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/blog/categories/jekyll/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-05-07T12:14:03+09:00</updated>
+  <updated>2014-08-30T18:04:56-07:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Moved to Octopress on Dokku!]]></title>
     <link href="http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress/"/>
-    <updated>2014-04-26T20:10:41+09:00</updated>
+    <updated>2014-04-26T04:10:41-07:00</updated>
     <id>http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress</id>
     <content type="html"><![CDATA[<p>So I have moved away from Wordpress and now on the hacker-friendly Octopress running on the mini-Heroku, Dokku. I also changed host from Godaddy to DigitalOcean, and there is definitely a speed increase with their SSDs.</p>
 

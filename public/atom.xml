@@ -4,7 +4,7 @@
   <title><![CDATA[Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-05-07T12:14:03+09:00</updated>
+  <updated>2014-08-30T18:04:56-07:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Tutorial: Incorporating Gridster to a Rails 4 App]]></title>
-    <link href="http://blog.ninjacorner.com/blog/2014/05/07/tutorial-incorporating-gridster-to-a-rails-4-app/"/>
-    <updated>2014-05-07T02:42:05+09:00</updated>
-    <id>http://blog.ninjacorner.com/blog/2014/05/07/tutorial-incorporating-gridster-to-a-rails-4-app</id>
+    <link href="http://blog.ninjacorner.com/blog/2014/05/06/tutorial-incorporating-gridster-to-a-rails-4-app/"/>
+    <updated>2014-05-06T10:42:05-07:00</updated>
+    <id>http://blog.ninjacorner.com/blog/2014/05/06/tutorial-incorporating-gridster-to-a-rails-4-app</id>
     <content type="html"><![CDATA[<h3>Intro</h3>
 
 <p>Gridster, by Ducksboard, is a jQuery library for building drag and drop items in a grid layout. You can use it drag listed elements anywhere in the defined grid.</p>
@@ -116,7 +116,7 @@
   <entry>
     <title type="html"><![CDATA[Moved to Octopress on Dokku!]]></title>
     <link href="http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress/"/>
-    <updated>2014-04-26T20:10:41+09:00</updated>
+    <updated>2014-04-26T04:10:41-07:00</updated>
     <id>http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress</id>
     <content type="html"><![CDATA[<p>So I have moved away from Wordpress and now on the hacker-friendly Octopress running on the mini-Heroku, Dokku. I also changed host from Godaddy to DigitalOcean, and there is definitely a speed increase with their SSDs.</p>
 
@@ -171,9 +171,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://blog.ninjacorner.com/blog/2014/04/26/hello-world/"/>
-    <updated>2014-04-26T14:50:16+09:00</updated>
-    <id>http://blog.ninjacorner.com/blog/2014/04/26/hello-world</id>
+    <link href="http://blog.ninjacorner.com/blog/2014/04/25/hello-world/"/>
+    <updated>2014-04-25T22:50:16-07:00</updated>
+    <id>http://blog.ninjacorner.com/blog/2014/04/25/hello-world</id>
     <content type="html"><![CDATA[<h2>My first post with Octopress!!</h2>
 
 <p>This is my first post to test Octopress.</p>
@@ -194,7 +194,7 @@
   <entry>
     <title type="html"><![CDATA[Ruby Ruby Ruby JS?]]></title>
     <link href="http://blog.ninjacorner.com/blog/2014/04/10/ruby-ruby-ruby-js/"/>
-    <updated>2014-04-10T18:20:52+09:00</updated>
+    <updated>2014-04-10T02:20:52-07:00</updated>
     <id>http://blog.ninjacorner.com/blog/2014/04/10/ruby-ruby-ruby-js</id>
     <content type="html"><![CDATA[<p>In mid February, I took on a project to develop a web portal for the company I was interning at, Asterism Healthcare Plus. This would be my first work on a real project rather than tutorial projects, I did warn them of course, but due to budget constraint they let me work on it. I was paired up with another guy, Laurent Safa, who wasn’t part of Asterism, but was paid to consult and manage the database for Asterism. Unlike me, Laurent was well experienced in web development, and being paired up with him meant that I would learn a ton.</p>
 
@@ -219,7 +219,7 @@
   <entry>
     <title type="html"><![CDATA[Addicted to Rails]]></title>
     <link href="http://blog.ninjacorner.com/blog/2014/01/21/addicted-to-rails/"/>
-    <updated>2014-01-21T18:50:49+09:00</updated>
+    <updated>2014-01-21T01:50:49-08:00</updated>
     <id>http://blog.ninjacorner.com/blog/2014/01/21/addicted-to-rails</id>
     <content type="html"><![CDATA[<p>In the summer of 2013, I started to question the value of my MBA. I mean, what can I DO with it? What can I BUILD with it? To correct this situation, I decided to take a deep dive into the world of computer programming.</p>
 
@@ -252,7 +252,7 @@
   <entry>
     <title type="html"><![CDATA[Knowledge Capital Is Leading the Startup Revolution in Osaka]]></title>
     <link href="http://blog.ninjacorner.com/blog/2013/12/20/knowledge-capital-is-leading-the-startup-revolution-in-osaka/"/>
-    <updated>2013-12-20T18:55:25+09:00</updated>
+    <updated>2013-12-20T01:55:25-08:00</updated>
     <id>http://blog.ninjacorner.com/blog/2013/12/20/knowledge-capital-is-leading-the-startup-revolution-in-osaka</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://blog.ninjacorner.com/images/knowledge-salon.jpg" title="Working in Knowledge Salon" ></p>
 
@@ -276,7 +276,7 @@
   <entry>
     <title type="html"><![CDATA[Social Norm - Don't Talk]]></title>
     <link href="http://blog.ninjacorner.com/blog/2013/12/14/social-norm-dont-talk/"/>
-    <updated>2013-12-14T19:01:33+09:00</updated>
+    <updated>2013-12-14T02:01:33-08:00</updated>
     <id>http://blog.ninjacorner.com/blog/2013/12/14/social-norm-dont-talk</id>
     <content type="html"><![CDATA[<p>One thing that I really miss about home is the ability to stand next to a stranger and say “Hi, how are you?” and start a conversation. You cannot find that here in Japan. Standing next to a stranger in Japan and saying “Genki desuka?” (equivalent of how are you) is just socially awkward. Of course it’s not all that bad, sometimes it’s really nice to commute on the train or bus in absolute silence. Imagine a packed train in Osaka with everyone speaking at once. if you are part of the conversation than that would be fun, but if you are trying to finish reading a chapter before the end of your commute then you might as well throw that book at someone’s face.</p>
 
@@ -296,7 +296,7 @@
   <entry>
     <title type="html"><![CDATA[Why Japanese Companies Cannot Expand (Hint: Recruitment System)]]></title>
     <link href="http://blog.ninjacorner.com/blog/2013/12/11/why-japanese-companies-cannot-expand-hint-recruitment-system/"/>
-    <updated>2013-12-11T19:05:53+09:00</updated>
+    <updated>2013-12-11T02:05:53-08:00</updated>
     <id>http://blog.ninjacorner.com/blog/2013/12/11/why-japanese-companies-cannot-expand-hint-recruitment-system</id>
     <content type="html"><![CDATA[<p>Japan’s economy over the past 23 years can be described with words like “shrunk,” “stalled,” or “deflated.” The reason is simple, Japanese companies have an inability to target customers beyond those who speaks Japanese. While there are many growing opportunities in the world, Japanese companies continue to fail in grabbing those opportunities. So how can these companies expand beyond their borders? First they need to start recruiting educated foreign employees who can speak multiple languages and understand foreign cultures. However, the current recruiting system is so structured that it is nearly impossible for foreign citizens living inside or outside Japan to participate in.</p>
 
@@ -318,7 +318,7 @@
   <entry>
     <title type="html"><![CDATA[Internships in Japan? (Laugh)]]></title>
     <link href="http://blog.ninjacorner.com/blog/2013/12/11/internships-in-japan-laugh/"/>
-    <updated>2013-12-11T19:03:05+09:00</updated>
+    <updated>2013-12-11T02:03:05-08:00</updated>
     <id>http://blog.ninjacorner.com/blog/2013/12/11/internships-in-japan-laugh</id>
     <content type="html"><![CDATA[<p>One of my close friend recently started a two week internship in Osaka. Her day to day responsibilities? Clean desks and make coffee. Hardly productive and educational for students. However she was one of the lucky ones, why? Because most Japanese companies do not know what an internship is, and if they do have an internship program, it is for two to three days.</p>
 

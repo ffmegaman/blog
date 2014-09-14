@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby | Philip Q Nguyen's blog]]></title>
-  <link href="http://blog.ninjacorner.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Rails | Philip Q Nguyen's blog]]></title>
+  <link href="http://blog.ninjacorner.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
   <updated>2014-09-14T16:19:18-07:00</updated>
   <id>http://blog.ninjacorner.com/</id>
@@ -117,42 +117,6 @@ $(document).ready &ndash;>
 </code>data-row<code>is the y position and</code>data-col<code>is the x position.</code>data-sizex<code>is the length of the block and</code>data-sizey` is the height of the block. By changing those values you can manually reposition or resize the blocks.</p>
 
 <p>Restart your server and take a look at your new Gridster layout.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Moved to Octopress on Dokku!]]></title>
-    <link href="http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress/"/>
-    <updated>2014-04-26T04:10:41-07:00</updated>
-    <id>http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress</id>
-    <content type="html"><![CDATA[<p>So I have moved away from Wordpress and now on the hacker-friendly Octopress running on the mini-Heroku, Dokku. I also changed host from Godaddy to DigitalOcean, and there is definitely a speed increase with their SSDs.</p>
-
-<p>Immediately, I experienced an issue on my first push of Octopress to Dokku. When I tried to view the blog on my browser, I recieved a Nginx gateway error. That was easily fixed however by ensuring that <code>gem 'thin'</code> is in the gemfile. After that, I just ran bundle install, git commit, and pushed it up to dokku and all was fine.</p>
-
-<p>Here is what my gemfile looks like now</p>
-
-<p>``` ruby My Octopress Blog&rsquo;s Gemfile
-gem &lsquo;rake&rsquo;, &lsquo;~> 0.9&rsquo;
-gem &lsquo;jekyll&rsquo;, &lsquo;~> 0.12&rsquo;
-gem &lsquo;rdiscount&rsquo;, &lsquo;~> 2.0.7&rsquo;
-gem &lsquo;pygments.rb&rsquo;, &lsquo;~> 0.3.4&rsquo;
-gem &lsquo;RedCloth&rsquo;, &lsquo;~> 4.2.9&rsquo;
-gem &lsquo;haml&rsquo;, &lsquo;~> 3.1.7&rsquo;
-gem &lsquo;compass&rsquo;, &lsquo;~> 0.12.2&rsquo;
-gem &lsquo;sass&rsquo;, &lsquo;~> 3.2&rsquo;
-gem &lsquo;sass-globbing&rsquo;, &lsquo;~> 1.0.0&rsquo;
-gem &lsquo;rubypants&rsquo;, &lsquo;~> 0.2.0&rsquo;
-gem &lsquo;rb-fsevent&rsquo;, &lsquo;~> 0.9&rsquo;
-gem &lsquo;stringex&rsquo;, &lsquo;~> 1.4.0&rsquo;
-gem &lsquo;liquid&rsquo;, &lsquo;~> 2.3.0&rsquo;
-gem &lsquo;directory_watcher&rsquo;, &lsquo;1.4.1&rsquo;</p>
-
-<p>group :production do
-  gem &lsquo;thin&rsquo; # Add this to your gemfile
-end</p>
-
-<p>gem &lsquo;sinatra&rsquo;, &lsquo;~> 1.4.2&rsquo;
-```</p>
 ]]></content>
   </entry>
   

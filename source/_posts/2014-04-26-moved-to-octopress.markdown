@@ -3,7 +3,7 @@ layout: post
 title: "Moved to Octopress on Dokku!"
 date: 2014-04-26 20:10:41 +0900
 comments: true
-categories: ruby, octopress, jekyll
+categories: ruby octopress jekyll
 ---
 
 So I have moved away from Wordpress and now on the hacker-friendly Octopress running on the mini-Heroku, Dokku. I also changed host from Godaddy to DigitalOcean, and there is definitely a speed increase with their SSDs.

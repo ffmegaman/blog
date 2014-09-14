@@ -3,7 +3,7 @@ layout: post
 title: "Tutorial: Incorporating Gridster to a Rails 4 app"
 date: 2014-05-07 02:42:05 +0900
 comments: true
-categories: 
+categories: ruby rails
 ---
 ###Intro
 Gridster, by Ducksboard, is a jQuery library for building drag and drop items in a grid layout. You can use it drag listed elements anywhere in the defined grid.
@@ -21,7 +21,7 @@ Before we begin, first we need to ensure that jQuery will work properly in Rails
 **Fourth:** In one of your stylesheets such as, custom_gridster.css.scss, add the follow code:
 
 ```css customer_gridster.scc.scss
-.gridster-cell { 
+.gridster-cell {
 	background-color: #2EFEF7;
 	list-style-type: none;
 }
@@ -34,7 +34,7 @@ $(document).ready ->
   $(".gridster ul").gridster({
       widget_margins: [10, 10],
       widget_base_dimensions: [140, 140]
-  }); 
+  });
 ```
 
 **Sixth:** In your view, wherever you want the gridster layout to be, add the following:
@@ -45,17 +45,17 @@ $(document).ready ->
         <li class="gridster-cell" data-row="1" data-col="1" data-sizex="1" data-sizey="1">Block1</li>
         <li class="gridster-cell" data-row="2" data-col="1" data-sizex="1" data-sizey="1">Block2</li>
         <li class="gridster-cell" data-row="3" data-col="1" data-sizex="1" data-sizey="1">Block3</li>
- 
+
         <li class="gridster-cell" data-row="1" data-col="2" data-sizex="2" data-sizey="1">Block4</li>
         <li class="gridster-cell" data-row="2" data-col="2" data-sizex="2" data-sizey="2">Block5</li>
- 
+
         <li class="gridster-cell" data-row="1" data-col="4" data-sizex="1" data-sizey="1">Block6</li>
         <li class="gridster-cell" data-row="2" data-col="4" data-sizex="2" data-sizey="1">Block7</li>
         <li class="gridster-cell" data-row="3" data-col="4" data-sizex="1" data-sizey="1">Block8</li>
- 
+
         <li class="gridster-cell" data-row="1" data-col="5" data-sizex="1" data-sizey="1">Block9</li>
         <li class="gridster-cell" data-row="3" data-col="5" data-sizex="1" data-sizey="1">Block10</li>
- 
+
         <li class="gridster-cell" data-row="1" data-col="6" data-sizex="1" data-sizey="1">Block11</li>
         <li class="gridster-cell" data-row="2" data-col="6" data-sizex="1" data-sizey="2">Block12</li>
     </ul>

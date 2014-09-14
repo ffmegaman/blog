@@ -4,7 +4,7 @@
   <title><![CDATA[Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-08-30T18:48:57-07:00</updated>
+  <updated>2014-09-14T16:19:18-07:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Ready for Codefellows' Ruby on Rails Accelerator]]></title>
+    <link href="http://blog.ninjacorner.com/blog/2014/09/14/getting-ready-for-codefellows-ruby-on-rails-accelerator/"/>
+    <updated>2014-09-14T15:49:09-07:00</updated>
+    <id>http://blog.ninjacorner.com/blog/2014/09/14/getting-ready-for-codefellows-ruby-on-rails-accelerator</id>
+    <content type="html"><![CDATA[<p>In the past few months, I have:</p>
+
+<ul>
+<li>finished all of my MBA requirements at Kwansei Gakuin University</li>
+<li>left Japan and return to Reno, Nevada</li>
+<li>moved to Seattle, Washington</li>
+<li>completed the one month Codefellows foundations bootcamp</li>
+<li>been accepted for the two months Codefellows Ruby on Rails Accelerator</li>
+</ul>
+
+
+<p>Phew! That&rsquo;s quite a life style change. As you can see, there are two types modules in Codefellows that I am attending; the foundations bootcamp, and the more advance Ruby on Rails Accelerator.</p>
+
+<p>The foundations bootcamp was supposed to be an intensive intro to CS and web development. Why did I mention &ldquo;supposed&rdquo; above? I had about a year worth of experience developing Ruby on Rails apps, and everything that was taught in class, made sense to me. While it definitely seemed very intensive to the majority of the class, there is a smaller fraction of the class that have self-taught themselves enough to the point that they can immediately pick up the new knowledge being taught. I guess, I fell into the latter category. I don&rsquo;t regret it at all because it definitely provided me with structure and best practices which I never knew before.</p>
+
+<p>Starting tomorrow, I will be attending the first day of the Codefellows Ruby on Rails Accelerator. Again with this, I hope to absorb in best practices, and to obtain a deeper understanding of the magic that happens inside the Rails framework.</p>
+
+<p>The whole day today, I have been preparing my computer by installing and/or updating a whole bunch of development software. Notably, Codefellows required that I had to uninstall RVM and instead install rbenv. I&rsquo;ve never used rbenv before, so this will be a new learning experience for me.</p>
+
+<p>In any case, I plan to keep updating this blog with my experiences at Codefellows.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tutorial: Incorporating Gridster to a Rails 4 App]]></title>

@@ -14,9 +14,9 @@ In the past few months, I have:
 - completed the one month Codefellows foundations bootcamp
 - been accepted for the two months Codefellows Ruby on Rails Accelerator
 
-Phew! That's quite a life style change. As you can see, there are two types modules in Codefellows that I am attending; the foundations bootcamp, and the more advance Ruby on Rails Accelerator.
+Phew! That's quite a life style change. As you can see, there are two types of modules in Codefellows that I have attended and will be attending; the foundations bootcamp, and the more advance Ruby on Rails Accelerator.
 
-The foundations bootcamp was supposed to be an intensive intro to CS and web development. Why did I mention "supposed" above?<!-- more --> I had about a year worth of experience developing Ruby on Rails apps, and everything that was taught in class, made sense to me. While it definitely seemed very intensive to the majority of the class, there is a smaller fraction of the class that have self-taught themselves enough to the point that they can immediately pick up the new knowledge being taught. I guess, I fell into the latter category. I don't regret it at all because it definitely provided me with structure and best practices which I never knew before.
+The foundations bootcamp was an intensive intro to CS and web development.<!-- more --> I had about a year worth of experience developing Ruby on Rails apps, and everything that was taught in class quickly made sense to me. What I really got out of it was the structure and best practices which I never knew before. In addition to that, the ability now to write pure JavaScript was a huge plus.
 
 Starting tomorrow, I will be attending the first day of the Codefellows Ruby on Rails Accelerator. Again with this, I hope to absorb in best practices, and to obtain a deeper understanding of the magic that happens inside the Rails framework.
 

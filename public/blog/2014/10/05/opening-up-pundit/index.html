@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Opening Up Pundit - Philip Q Nguyen's blog</title>
+  <meta name="author" content="Philip Q Nguyen">
+
+  
+  <meta name="description" content="Opening Up Pundit written Oct 5th, 2014 I recently used Pundit as an authorization tool as part of my assignments at Code Fellows. I&rsquo;ve been &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.ninjacorner.com/blog/2014/10/05/opening-up-pundit">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Philip Q Nguyen's blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Opening Up Pundit</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-10-05T21:24:02-07:00" pubdate data-updated="true">Oct 5<span>th</span>, 2014</time>
+          
+
+
+        </div>
+        <p>I recently used <a href="https://github.com/elabs/pundit">Pundit</a> as an authorization tool as part of my assignments at Code Fellows. I&rsquo;ve been told that it is extremely lightweight, but I had no idea just how lightweight it was until I opened it up and went through the code line by line.</p>
+
+<p>Pundit provides a <code>module Pundit</code>, with all the logic in it. There is also a <code>class PolicyFinder</code> within the module that gives Pundit its capability to match controller actions and objects to its proper class policies.<!-- more --></p>
+
+<p>Probably the best way to understand Pundit is to start with one of the helper methods that it provides and follow along with its code executions. The most commonly used method that Pundit provides is <code>authorize</code>. Let&rsquo;s take a look at it. I&rsquo;ve added comments to the original code to give some additional information.</p>
+
+<p><code>authorize</code> is defined as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">authorize</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">query</span> <span class="o">||=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:action</span><span class="o">].</span><span class="n">to_s</span> <span class="o">+</span> <span class="s2">&quot;?&quot;</span> <span class="c1"># Appends ? to name of controller action</span>
+</span><span class='line'>  <span class="vi">@_policy_authorized</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># Flag to be used in #verify_authorized</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">policy</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">record</span><span class="p">)</span> <span class="c1"># calls policy with the record object and through other helper_methods, it instantiates the class policy. For example, ArticlePolicy.new(user, record)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">unless</span> <span class="n">policy</span><span class="o">.</span><span class="n">public_send</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># sends method? to the class policy. For example, it sends #create? to ArticlePolicy. If it is false, raise errors, otherwise return true.</span>
+</span><span class='line'>    <span class="n">error</span> <span class="o">=</span> <span class="no">NotAuthorizedError</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;not allowed to </span><span class="si">#{</span><span class="n">query</span><span class="si">}</span><span class="s2"> this </span><span class="si">#{</span><span class="n">record</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">error</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">error</span><span class="o">.</span><span class="n">record</span><span class="p">,</span> <span class="n">error</span><span class="o">.</span><span class="n">policy</span> <span class="o">=</span> <span class="n">query</span><span class="p">,</span> <span class="n">record</span><span class="p">,</span> <span class="n">policy</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">raise</span> <span class="n">error</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Authorize takes a parameter, record, which is an object that needs to be checked for authorization. The first two lines are self explanatory. The meat of it is when it does <code>policy = policy(record)</code>. the #policy(record) method is another helper method defined as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">policy</span><span class="p">(</span><span class="n">record</span><span class="p">)</span> <span class="c1"># Accepts the record and calls singleton #policy! on Pundit.</span>
+</span><span class='line'>  <span class="vi">@_policy</span> <span class="ow">or</span> <span class="no">Pundit</span><span class="o">.</span><span class="n">policy!</span><span class="p">(</span><span class="n">pundit_user</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here, it uses either an already provided policy (<code>@_policy</code>), or it will call the singleton method <code>#policy!(pundit_user, record)</code> on the <code>module Pundit</code>. <code>pundit_user</code> is simply defined as <code>current_user</code>. Let&rsquo;s take a look at the singleton method <code>#policy!</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span> <span class="c1"># Opens up Pundit&#39;s singletons. All methods inside are singletons</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#... other code ...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">policy!</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span> <span class="c1"># Finds the class policy and calls #new. Example: ArticlePolicy.new(user, record) and then admin&#39;s codes take over.</span>
+</span><span class='line'>    <span class="no">PolicyFinder</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">record</span><span class="p">)</span><span class="o">.</span><span class="n">policy!</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It instantiates <code>PolicyFinder</code> with the <code>record</code> argument, calls <code>#policy!</code>, and then it instantiates the result of that. Yes, it is a bit confusing if we stop here. Essentially, what it is doing is that the <code>PolicyFinder</code>, a class inside the Pundit module, is tasked with the sole purpose of finding a matching class policy. For example, if the record object is an <code>@article</code> object that is called within the <code>ArticleController</code>, <code>PolicyFinder.new(@article).policy!</code> will find the corresponding <code>ArticlePolicy</code>. Once it is found, this will occur: <code>ArticlePolicy.new(user, @article)</code>. <code>ArticlePolicy</code> is where all of the rules will be custom defined by the administrator of the Rails app.</p>
+
+<p>If you don&rsquo;t believe me, we can dive deeper by taking a look at the <code>#policy!(user, record)</code> inside the <code>class PolicyFinder</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Pundit</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">PolicyFinder</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># ... Other method definitions....</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">policy!</span> <span class="c1"># Calls policy if it exists or raise error</span>
+</span><span class='line'>      <span class="n">policy</span> <span class="ow">or</span> <span class="k">raise</span> <span class="no">NotDefinedError</span><span class="p">,</span> <span class="s2">&quot;unable to find policy </span><span class="si">#{</span><span class="n">find</span><span class="si">}</span><span class="s2"> for </span><span class="si">#{</span><span class="n">object</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># ... other definitions ...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Again, <code>#policy!</code> is another helper method to raise an error if there is no policy, otherwise call <code>#policy</code>, which is also found inside the <code>class PolicyFinder</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Pundit</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">PolicyFinder</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># ... Other method definitions ...</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">policy</span> <span class="c1"># Finds the class and then returns the class policy.</span>
+</span><span class='line'>      <span class="n">klass</span> <span class="o">=</span> <span class="n">find</span>
+</span><span class='line'>      <span class="n">klass</span> <span class="o">=</span> <span class="n">klass</span><span class="o">.</span><span class="n">constantize</span> <span class="k">if</span> <span class="n">klass</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="nb">String</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">klass</span> <span class="c1"># Returns policy class. Ex) ArticlePolicy</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">NameError</span>
+</span><span class='line'>      <span class="kp">nil</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># ... other method definitions ...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here, it uses the <code>find</code> method to find the name of the class policy and if it is a string, it will constantize it. Otherwise it returns nil if it could not return the name of the class policy.</p>
+
+<p>The <code>find</code> method is defined as the following (I added in a lot of comments to help you along the way):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Pundit</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">PolicyFinder</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># ... Other method definitions ...</span>
+</span><span class='line'>    <span class="c1"># The first two conditions will fail if policy_class is not defined in the model. Policy_class is used when you want to have an object associated with a differently named policy.</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># The following conditions will prepend the class name to the policy. For instance, Article will be prepend into &#39;Policy&#39; making it ArticlePolicy.</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">find</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">object</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:policy_class</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">object</span><span class="o">.</span><span class="n">policy_class</span> <span class="c1"># Returns WhateverPolicy if policy_class is defined in the object&#39;s model.</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="n">object</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:policy_class</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">object</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">policy_class</span> <span class="c1"># Returns WhateverPolicy if policy_class is defined in the object&#39;s model.</span>
+</span><span class='line'>      <span class="k">else</span>  <span class="c1"># These conditions below is for objects queried</span>
+</span><span class='line'>        <span class="n">klass</span> <span class="o">=</span> <span class="k">if</span> <span class="n">object</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:model_name</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">object</span><span class="o">.</span><span class="n">model_name</span> <span class="c1"># model_name is a method in rails.</span>
+</span><span class='line'>        <span class="k">elsif</span> <span class="n">object</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:model_name</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">object</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">model_name</span> <span class="c1"># model_name is a method in rails.</span>
+</span><span class='line'>        <span class="k">elsif</span> <span class="n">object</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Class</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">object</span>
+</span><span class='line'>        <span class="k">elsif</span> <span class="n">object</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Symbol</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">object</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">classify</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">object</span><span class="o">.</span><span class="n">class</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>        <span class="s2">&quot;</span><span class="si">#{</span><span class="n">klass</span><span class="si">}</span><span class="s2">Policy&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Basically, all it is doing is appending &lsquo;Policy&rsquo; to the name of the object. The administrator may have put in different types of objects as an argument, or perhaps the administrator wanted a different policy for that object, the multiple conditions are done to check for them. In the end, if the object is @article, it finds the class of that, which is Article, and appends it to ArticlePolicy.</p>
+
+<p>Now back to the singleton method <code>#policy(user, record)</code>!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span> <span class="c1"># Opens up Pundit&#39;s singletons. All methods inside are singletons</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#... other code ...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">policy!</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span> <span class="c1"># Finds the class policy and calls #new. Example: ArticlePolicy.new(user, record) and then admin&#39;s codes take over.</span>
+</span><span class='line'>    <span class="no">PolicyFinder</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">record</span><span class="p">)</span><span class="o">.</span><span class="n">policy!</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If we are doing <code>Article</code>, <code>PolicyFinder.new(record).policy!</code> returns <code>ArticlePolicy</code> which is then instantiated with <code>new(user, record)</code>. The contents of <code>ArticlePolicy</code> should be defined by the administrator inside the Rails app itself. The last and final step is to go back to the <code>authorize</code> method and check to see if the code defined by the administrator evaluates to true or false:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">authorize</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">query</span> <span class="o">||=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:action</span><span class="o">].</span><span class="n">to_s</span> <span class="o">+</span> <span class="s2">&quot;?&quot;</span> <span class="c1"># Name of controller action</span>
+</span><span class='line'>  <span class="vi">@_policy_authorized</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># Flag to be used in #verify_authorized</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">policy</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">record</span><span class="p">)</span> <span class="c1"># calls policy with the record object and through other helper_methods, it instantiates the class policy. For example, ArticlePolicy.new(user, record)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">unless</span> <span class="n">policy</span><span class="o">.</span><span class="n">public_send</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="c1"># sends method? to the class policy. For example, it sends #create? to ArticlePolicy. If it is false, raise errors, otherwise return true.</span>
+</span><span class='line'>    <span class="n">error</span> <span class="o">=</span> <span class="no">NotAuthorizedError</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;not allowed to </span><span class="si">#{</span><span class="n">query</span><span class="si">}</span><span class="s2"> this </span><span class="si">#{</span><span class="n">record</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">error</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">error</span><span class="o">.</span><span class="n">record</span><span class="p">,</span> <span class="n">error</span><span class="o">.</span><span class="n">policy</span> <span class="o">=</span> <span class="n">query</span><span class="p">,</span> <span class="n">record</span><span class="p">,</span> <span class="n">policy</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">raise</span> <span class="n">error</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Policy is the instance of ArticlePolicy and unless <code>policy.public_send(query)</code>, for example if query is <code>create?</code>, is false, it raises an unauthorized error. Otherwise, it returns true and allows the user to perform the action.</p>
+
+<p>There are two other commonly used methods provided by Pundit, they are <code>policy(record)</code> and <code>policy_scope(scope)</code>. Both of the methods follow a similar path as the <code>authorize</code> method, with only a few deviations. Otherwise, the meat of pundit has been covered.</p>
+
+
+        <hr class="divider-short"/>
+
+        
+        <section>
+          <h1>Comments</h1>
+          <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/09/27/aerospace-to-mba-to-web-apps-how-i-got-here/" title="Previous Post: Aerospace to MBA to Web Apps: How I got here">&laquo; Previous: Aerospace to MBA to Web Apps: How I got here</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/philipqnguyen"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/ffmegaman"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+    
+      
+
+<script type="text/javascript">
+      var disqus_shortname = 'philipqnguyen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.ninjacorner.com/blog/2014/10/05/opening-up-pundit/';
+        var disqus_url = 'http://blog.ninjacorner.com/blog/2014/10/05/opening-up-pundit/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+  </body>
+</html>

@@ -1,3 +1,9 @@
 [submodule ".themes/Phil-MediumFox"]
 	path = .themes/Phil-MediumFox
 	url = https://github.com/ffmegaman/MediumFox
+[submodule "MediumFox"]
+	path = MediumFox
+	url = https://github.com/philipqnguyen/MediumFox/
+[submodule ".themes/MediumFoxCustom"]
+	path = .themes/MediumFoxCustom
+	url = https://github.com/philipqnguyen/MediumFox/

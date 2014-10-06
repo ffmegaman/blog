@@ -2,72 +2,76 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.ninjacorner.com/blog/2013/12/11/internships-in-japan-laugh/</loc>
-        <lastmod>2014-08-30T18:48:36-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.ninjacorner.com/blog/2013/12/11/why-japanese-companies-cannot-expand-hint-recruitment-system/
         </loc>
-        <lastmod>2014-08-30T18:48:36-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/blog/2013/12/14/social-norm-dont-talk/</loc>
-        <lastmod>2014-08-30T18:48:36-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.ninjacorner.com/blog/2013/12/20/knowledge-capital-is-leading-the-startup-revolution-in-osaka/
         </loc>
-        <lastmod>2014-08-30T18:48:36-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/blog/2014/01/21/addicted-to-rails/</loc>
-        <lastmod>2014-08-30T18:48:36-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/blog/2014/04/10/ruby-ruby-ruby-js/</loc>
-        <lastmod>2014-08-30T18:48:36-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/blog/2014/04/25/hello-world/</loc>
-        <lastmod>2014-08-30T18:48:36-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/blog/2014/04/26/moved-to-octopress/</loc>
-        <lastmod>2014-09-14T15:53:30-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.ninjacorner.com/blog/2014/05/06/tutorial-incorporating-gridster-to-a-rails-4-app/
         </loc>
-        <lastmod>2014-09-14T15:54:07-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.ninjacorner.com/blog/2014/09/14/getting-ready-for-codefellows-ruby-on-rails-accelerator/
         </loc>
-        <lastmod>2014-09-17T13:22:32-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.ninjacorner.com/blog/2014/09/27/aerospace-to-mba-to-web-apps-how-i-got-here/
         </loc>
-        <lastmod>2014-09-27T23:02:04-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.ninjacorner.com/blog/2014/10/05/opening-up-pundit/</loc>
+        <lastmod>2014-10-05T22:49:06-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/blog/archives/</loc>
-        <lastmod>2014-09-27T23:02:04-07:00</lastmod>
+        <lastmod>2014-10-05T22:49:06-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/</loc>
-        <lastmod>2014-09-27T23:02:04-07:00</lastmod>
+        <lastmod>2014-10-05T22:49:06-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/posts/</loc>
-        <lastmod>2014-09-27T23:02:04-07:00</lastmod>
+        <lastmod>2014-10-05T22:49:06-07:00</lastmod>
     </url>
     <url>
         <loc>http://blog.ninjacorner.com/robots.txt</loc>
-        <lastmod>2014-08-30T18:03:21-07:00</lastmod>
+        <lastmod>2014-09-28T00:20:31-07:00</lastmod>
     </url>
 </urlset>

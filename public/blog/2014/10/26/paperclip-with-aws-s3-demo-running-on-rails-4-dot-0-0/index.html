@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Paperclip With AWS S3 Demo Running on Rails 4.0.0 - Philip Q Nguyen's blog</title>
+  <meta name="author" content="Philip Q Nguyen">
+
+  
+  <meta name="description" content="Paperclip With AWS S3 Demo Running on Rails 4.0.0 written Oct 26th, 2014 in aws, codefellows, paperclip, rails, ruby, tutorial This is a tutorial &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.ninjacorner.com/blog/2014/10/26/paperclip-with-aws-s3-demo-running-on-rails-4-dot-0-0">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Philip Q Nguyen's blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Paperclip With AWS S3 Demo Running on Rails 4.0.0</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-10-26T20:43:56-07:00" pubdate data-updated="true">Oct 26<span>th</span>, 2014</time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/aws/'>aws</a>, <a class='category' href='/blog/categories/codefellows/'>codefellows</a>, <a class='category' href='/blog/categories/paperclip/'>paperclip</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/tutorial/'>tutorial</a>
+  
+</span>
+
+
+        </div>
+        <p>This is a tutorial and demo to get Paperclip with AWS S3 uploads running on rails 4.0.0. The source code can be found <a href="https://github.com/philipqnguyen/paperclip-example">here</a>. This demo was created as part of the Code Fellows&#8217; <a href="https://github.com/uploaders">Uploaders group</a>.</p>
+
+<p>In this tutorial, we will make a simple site where articles can be created and pictures can be upload as part of the articles. <!-- more --></p>
+
+<h2>Step 1 &ndash; Ensure you have all dependencies</h2>
+
+<p>Make sure you have an AWS account with an S3 bucket. Keep your access key and your secret access key handy because we will need it in a few steps.</p>
+
+<p>Ensure that you have ImageMagick installed. If you don&rsquo;t, you can install it via Homebrew with <code>brew install imagemagick</code></p>
+
+<p>If you don&rsquo;t already have Rails 4.0.0, you can get it by typing this in your terminal: <code>gem install rails --version 4.0.0</code></p>
+
+<p>Create a new rails app with <code>rails _4.0.0_ new &lt;appname&gt;</code></p>
+
+<p>In your Gemfile, add:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;paperclip&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 4.2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;aws-sdk&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.55.0&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then run <code>bundle install</code>.</p>
+
+<h2>Step 2 &ndash; Make the articles</h2>
+
+<p>For the purpose of this demo, we will generate an Article scaffold to save some time. <code>rails g scaffold Article title:string body:text</code></p>
+
+<p>bundle exec rake db:migrate</p>
+
+<p>In your config/routes.rb, add <code>root 'articles#index'</code>.</p>
+
+<h2>Step 3 &ndash; Add Paperclip</h2>
+
+<p>Run <code>rails g paperclip article pic</code> in order to add a the &ldquo;pic&rdquo; column to the Articles table. Then, <code>bundle exec rake db:migrate</code>.</p>
+
+<p>Add the following to the model, Article.rb:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">has_attached_file</span> <span class="ss">:pic</span><span class="p">,</span> <span class="ss">:styles</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:medium</span> <span class="o">=&gt;</span> <span class="s2">&quot;300x300&gt;&quot;</span><span class="p">,</span> <span class="ss">:thumb</span> <span class="o">=&gt;</span> <span class="s2">&quot;100x100&gt;&quot;</span> <span class="p">},</span> <span class="ss">:default_url</span> <span class="o">=&gt;</span> <span class="s2">&quot;/images/:style/missing.png&quot;</span>
+</span><span class='line'>  <span class="n">validates_attachment_content_type</span> <span class="ss">:pic</span><span class="p">,</span> <span class="ss">:content_type</span> <span class="o">=&gt;</span> <span class="sr">/\Aimage\/.*\Z/</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That will create two additional versions of each pic that is uploaded, a medium and a thumbnail version. In addition, it will also validate that the file is an image. You can make changes to the sizes or add additional variations if you want.</p>
+
+<p>Add <code>&lt;%= image_tag @article.pic.url(:medium) %&gt;</code> to the article&rsquo;s show page.</p>
+
+<p>Add <code>&lt;%= f.file_field :pic %&gt;</code> in your form and add <code>:html =&gt; { :multipart =&gt; true }</code> to the top of your form so that it looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@article</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:multipart</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="p">})</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@article</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">any?</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">    &lt;div id=&quot;error_explanation&quot;&gt;</span>
+</span><span class='line'><span class="x">      &lt;h2&gt;</span><span class="cp">&lt;%=</span> <span class="n">pluralize</span><span class="p">(</span><span class="vi">@article</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"> prohibited this article from being saved:&lt;/h2&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">      &lt;ul&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%</span> <span class="vi">@article</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">msg</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">        &lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">msg</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;/ul&gt;</span>
+</span><span class='line'><span class="x">    &lt;/div&gt;</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">file_field</span> <span class="ss">:pic</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="x">  &lt;div class=&quot;field&quot;&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:title</span> <span class="cp">%&gt;</span><span class="x">&lt;br&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:title</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/div&gt;</span>
+</span><span class='line'><span class="x">  &lt;div class=&quot;field&quot;&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:body</span> <span class="cp">%&gt;</span><span class="x">&lt;br&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_area</span> <span class="ss">:body</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/div&gt;</span>
+</span><span class='line'><span class="x">  &lt;div class=&quot;actions&quot;&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/div&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Step 4 &ndash; Configure Paperclip and try it!</h2>
+
+<p>Add this to your config/environments/development.rb. Also add it to your production.rb if you plan to use this in production.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Paperclip</span><span class="o">.</span><span class="n">options</span><span class="o">[</span><span class="ss">:command_path</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;/usr/local/bin/&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">paperclip_defaults</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="ss">:s3</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;S3_BUCKET_NAME&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:access_key_id</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:secret_access_key</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="o">]</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you need to add the S3 bucket name, S3 access key and S3 secret access key into your shell profile. If you are on a Mac and using bash, put this into your .bash_profile:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">export</span> <span class="no">S3_BUCKET_NAME</span><span class="o">=</span><span class="s2">&quot;&lt;name of your bucket&gt;&quot;</span>
+</span><span class='line'><span class="n">export</span> <span class="no">AWS_ACCESS_KEY_ID</span><span class="o">=</span><span class="s2">&quot;&lt;your key&gt;&quot;</span>
+</span><span class='line'><span class="n">export</span> <span class="no">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="s2">&quot;&lt;your secret key&gt;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Launch the server and try it out. If you get an error upon uploading a picture that says: “The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.” You will need to add this <code>:s3_host_name =&gt; 's3-us-west-2.amazonaws.com'</code> into your development.rb and likewise in your production.rb so that it looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Paperclip</span><span class="o">.</span><span class="n">options</span><span class="o">[</span><span class="ss">:command_path</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;/usr/local/bin/&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">paperclip_defaults</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="ss">:s3</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;S3_BUCKET_NAME&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:s3_host_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;s3-us-west-2.amazonaws.com&#39;</span><span class="p">,</span> <span class="c1"># this</span>
+</span><span class='line'>      <span class="ss">:access_key_id</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:secret_access_key</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="o">]</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now it should work. I hope this helps!</p>
+
+<h2>References used in this tutorial</h2>
+
+<p><a href="https://devcenter.heroku.com/articles/paperclip-s3">Heroku</a> has great documentation as well as the original
+<a href="https://github.com/thoughtbot/paperclip">Paperclip</a> documentation.</p>
+
+
+        <hr class="divider-short"/>
+
+        
+        <section>
+          <h1>Comments</h1>
+          <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/10/05/opening-up-pundit/" title="Previous Post: Opening up Pundit">&laquo; Previous: Opening up Pundit</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/philipqnguyen"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/ffmegaman"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+    
+      
+
+<script type="text/javascript">
+      var disqus_shortname = 'philipqnguyen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.ninjacorner.com/blog/2014/10/26/paperclip-with-aws-s3-demo-running-on-rails-4-dot-0-0/';
+        var disqus_url = 'http://blog.ninjacorner.com/blog/2014/10/26/paperclip-with-aws-s3-demo-running-on-rails-4-dot-0-0/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+  </body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-10-29T16:56:45-07:00</updated>
+  <updated>2014-11-01T20:33:57-07:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -35,7 +35,7 @@
     <id>http://blog.ninjacorner.com/blog/2014/10/26/paperclip-with-aws-s3-demo-running-on-rails-4-dot-0-0</id>
     <content type="html"><![CDATA[<p>This is a tutorial and demo to get Paperclip with AWS S3 uploads running on rails 4.0.0. The source code can be found <a href="https://github.com/philipqnguyen/paperclip-example">here</a>. This demo was created as part of the Code Fellows' <a href="https://github.com/uploaders">Uploaders group</a>.</p>
 
-<p>In this tutorial, we will make a simple site where articles can be created and pictures can be upload as part of the articles. <!-- more --></p>
+<p>In this tutorial, we will make a simple site where articles can be created and pictures can be upload as part of the articles using the Paperclip gem. <!-- more --></p>
 
 <h2>Step 1 &ndash; Ensure you have all dependencies</h2>
 
@@ -48,7 +48,7 @@
 <p>Create a new rails app with <code>rails _4.0.0_ new &lt;appname&gt;</code></p>
 
 <p>In your Gemfile, add:
-<code>ruby
+<code>ruby Gemfile
 gem 'paperclip', '~&gt; 4.2'
 gem 'aws-sdk', '~&gt; 1.55.0'
 </code>
@@ -58,7 +58,7 @@ Then run <code>bundle install</code>.</p>
 
 <p>For the purpose of this demo, we will generate an Article scaffold to save some time. <code>rails g scaffold Article title:string body:text</code></p>
 
-<p>bundle exec rake db:migrate</p>
+<p>Run <code>bundle exec rake db:migrate</code></p>
 
 <p>In your config/routes.rb, add <code>root 'articles#index'</code>.</p>
 
@@ -67,7 +67,7 @@ Then run <code>bundle install</code>.</p>
 <p>Run <code>rails g paperclip article pic</code> in order to add a the &ldquo;pic&rdquo; column to the Articles table. Then, <code>bundle exec rake db:migrate</code>.</p>
 
 <p>Add the following to the model, Article.rb:
-<code>ruby
+<code>ruby Article.rb
   has_attached_file :pic, :styles =&gt; { :medium =&gt; "300x300&gt;", :thumb =&gt; "100x100&gt;" }, :default_url =&gt; "/images/:style/missing.png"
   validates_attachment_content_type :pic, :content_type =&gt; /\Aimage\/.*\Z/
 </code>
@@ -77,7 +77,7 @@ That will create two additional versions of each pic that is uploaded, a medium 
 
 <p>Add <code>&lt;%= f.file_field :pic %&gt;</code> in your form and add <code>:html =&gt; { :multipart =&gt; true }</code> to the top of your form so that it looks like this:</p>
 
-<p>``` erb
+<p>``` erb _form.html.erb
 &lt;%= form_for(@article, :html => { :multipart => true }) do |f| %>
   &lt;% if @article.errors.any? %></p>
 
@@ -122,7 +122,7 @@ That will create two additional versions of each pic that is uploaded, a medium 
 <h2>Step 4 &ndash; Configure Paperclip and try it!</h2>
 
 <p>Add this to your config/environments/development.rb. Also add it to your production.rb if you plan to use this in production.
-``` ruby
+``` ruby development.rb
   Paperclip.options[:command_path] = &ldquo;/usr/local/bin/&rdquo;</p>
 
 <p>  config.paperclip_defaults = {</p>
@@ -139,7 +139,7 @@ That will create two additional versions of each pic that is uploaded, a medium 
 ```
 Now you need to add the S3 bucket name, S3 access key and S3 secret access key into your shell profile. If you are on a Mac and using bash, put this into your .bash_profile:</p>
 
-<p><code>ruby
+<p><code>ruby .bash_profile
 export S3_BUCKET_NAME="&lt;name of your bucket&gt;"
 export AWS_ACCESS_KEY_ID="&lt;your key&gt;"
 export AWS_SECRET_ACCESS_KEY="&lt;your secret key&gt;"
@@ -147,7 +147,7 @@ export AWS_SECRET_ACCESS_KEY="&lt;your secret key&gt;"
 
 <p>Launch the server and try it out. If you get an error upon uploading a picture that says: “The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.” You will need to add this <code>:s3_host_name =&gt; 's3-us-west-2.amazonaws.com'</code> into your development.rb and likewise in your production.rb so that it looks like this:</p>
 
-<p>``` ruby
+<p>``` ruby development.rb
   Paperclip.options[:command_path] = &ldquo;/usr/local/bin/&rdquo;</p>
 
 <p>  config.paperclip_defaults = {</p>

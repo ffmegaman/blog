@@ -72,7 +72,7 @@ in
         </div>
         <p>This is a tutorial and demo to get Paperclip with AWS S3 uploads running on rails 4.0.0. The source code can be found <a href="https://github.com/philipqnguyen/paperclip-example">here</a>. This demo was created as part of the Code Fellows&#8217; <a href="https://github.com/uploaders">Uploaders group</a>.</p>
 
-<p>In this tutorial, we will make a simple site where articles can be created and pictures can be upload as part of the articles. <!-- more --></p>
+<p>In this tutorial, we will make a simple site where articles can be created and pictures can be upload as part of the articles using the Paperclip gem. <!-- more --></p>
 
 <h2>Step 1 &ndash; Ensure you have all dependencies</h2>
 
@@ -86,7 +86,7 @@ in
 
 <p>In your Gemfile, add:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;paperclip&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 4.2&#39;</span>
 </span><span class='line'><span class="n">gem</span> <span class="s1">&#39;aws-sdk&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.55.0&#39;</span>
@@ -99,7 +99,7 @@ in
 
 <p>For the purpose of this demo, we will generate an Article scaffold to save some time. <code>rails g scaffold Article title:string body:text</code></p>
 
-<p>bundle exec rake db:migrate</p>
+<p>Run <code>bundle exec rake db:migrate</code></p>
 
 <p>In your config/routes.rb, add <code>root 'articles#index'</code>.</p>
 
@@ -109,7 +109,7 @@ in
 
 <p>Add the following to the model, Article.rb:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Article.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">has_attached_file</span> <span class="ss">:pic</span><span class="p">,</span> <span class="ss">:styles</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:medium</span> <span class="o">=&gt;</span> <span class="s2">&quot;300x300&gt;&quot;</span><span class="p">,</span> <span class="ss">:thumb</span> <span class="o">=&gt;</span> <span class="s2">&quot;100x100&gt;&quot;</span> <span class="p">},</span> <span class="ss">:default_url</span> <span class="o">=&gt;</span> <span class="s2">&quot;/images/:style/missing.png&quot;</span>
 </span><span class='line'>  <span class="n">validates_attachment_content_type</span> <span class="ss">:pic</span><span class="p">,</span> <span class="ss">:content_type</span> <span class="o">=&gt;</span> <span class="sr">/\Aimage\/.*\Z/</span>
@@ -122,7 +122,7 @@ in
 
 <p>Add <code>&lt;%= f.file_field :pic %&gt;</code> in your form and add <code>:html =&gt; { :multipart =&gt; true }</code> to the top of your form so that it looks like this:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>_form.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -183,7 +183,7 @@ in
 
 <p>Add this to your config/environments/development.rb. Also add it to your production.rb if you plan to use this in production.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -208,7 +208,7 @@ in
 
 <p>Now you need to add the S3 bucket name, S3 access key and S3 secret access key into your shell profile. If you are on a Mac and using bash, put this into your .bash_profile:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>.bash_profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">export</span> <span class="no">S3_BUCKET_NAME</span><span class="o">=</span><span class="s2">&quot;&lt;name of your bucket&gt;&quot;</span>
@@ -219,7 +219,7 @@ in
 
 <p>Launch the server and try it out. If you get an error upon uploading a picture that says: “The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.” You will need to add this <code>:s3_host_name =&gt; 's3-us-west-2.amazonaws.com'</code> into your development.rb and likewise in your production.rb so that it looks like this:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

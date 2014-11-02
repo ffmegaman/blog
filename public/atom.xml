@@ -4,7 +4,7 @@
   <title><![CDATA[Philip Q Nguyen's blog]]></title>
   <link href="http://blog.ninjacorner.com/atom.xml" rel="self"/>
   <link href="http://blog.ninjacorner.com/"/>
-  <updated>2014-11-01T20:33:57-07:00</updated>
+  <updated>2014-11-01T21:32:05-07:00</updated>
   <id>http://blog.ninjacorner.com/</id>
   <author>
     <name><![CDATA[Philip Q Nguyen]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Angular.js Vocabs!]]></title>
+    <link href="http://blog.ninjacorner.com/blog/2014/11/01/angular-dot-js-vocabs/"/>
+    <updated>2014-11-01T20:41:53-07:00</updated>
+    <id>http://blog.ninjacorner.com/blog/2014/11/01/angular-dot-js-vocabs</id>
+    <content type="html"><![CDATA[<p>I have been studying Angular all week, and what better than to read the <a href="https://docs.angularjs.org/api">docs</a> and summarize some of the most commonly used terms in Angular. <!-- more --></p>
+
+<p>Controller: The controller contains business logic used to populate the scope with functions and values.</p>
+
+<p>Scope: Scope is a container of functions and values originally defined in the controller. These functions and values can be binded into the views, within the scoped areas.</p>
+
+<p>Directive: Directives are markers placed within the DOM. When a specific directive is activated, it will perform the behaviour that was defined in it. Angular comes with a lot of built-in directives, for example: <code>ng-controller="SomeController"</code> will create a scope defined in SomeController within the nested DOM elements, making those functions and properties available for use. In addition, custom directives can be defined.</p>
+
+<p>Data binding: This is one of Angular&rsquo;s most powerful selling points. Data are synchronized both ways between the views and the models.</p>
+
+<p>Module: Modules are simply containers of code, used for organizational purposes.</p>
+
+<p>Dependency injection: Functions from other models can be transferred to another module via Dependency Injection.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[API Versioning for the Front End]]></title>

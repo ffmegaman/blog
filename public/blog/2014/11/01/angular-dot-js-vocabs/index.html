@@ -9,11 +9,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>API Versioning for the Front End - Philip Q Nguyen's blog</title>
+  <title>Angular.js Vocabs! - Philip Q Nguyen's blog</title>
   <meta name="author" content="Philip Q Nguyen">
 
   
-  <meta name="description" content="API Versioning for the Front End written Oct 29th, 2014 in angular, api, codefellows, rails, ruby, versioning First of all, this is not a post &hellip;">
+  <meta name="description" content="Angular.js Vocabs! written Nov 1st, 2014 in angular, javascript I have been studying Angular all week, and what better than to read the docs and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.ninjacorner.com/blog/2014/10/29/api-versioning-for-the-front-end">
+  <link rel="canonical" href="http://blog.ninjacorner.com/blog/2014/11/01/angular-dot-js-vocabs">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Philip Q Nguyen's blog" type="application/atom+xml">
@@ -43,7 +43,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <h1>API Versioning for the Front End</h1>
+        <h1>Angular.js Vocabs!</h1>
         <div class="meta">
           written 
 
@@ -58,25 +58,31 @@
 
 
 
-<time datetime="2014-10-29T16:33:58-07:00" pubdate data-updated="true">Oct 29<span>th</span>, 2014</time>
+<time datetime="2014-11-01T20:41:53-07:00" pubdate data-updated="true">Nov 1<span>st</span>, 2014</time>
           
 
 in
 <span class="categories">
   
-    <a class='category' href='/blog/categories/angular/'>angular</a>, <a class='category' href='/blog/categories/api/'>api</a>, <a class='category' href='/blog/categories/codefellows/'>codefellows</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/versioning/'>versioning</a>
+    <a class='category' href='/blog/categories/angular/'>angular</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>
   
 </span>
 
 
         </div>
-        <p>First of all, this is not a post comparing the different types of strategies. While there are many types of API versioning, and a great blog post about each of those strategies have been discussed by <a href="http://urthen.github.io/2013/05/09/ways-to-version-your-api/">Michael Pratt</a>, I&rsquo;m just going to focus on the strategy that I have chosen for my project. <!-- more --></p>
+        <p>I have been studying Angular all week, and what better than to read the <a href="https://docs.angularjs.org/api">docs</a> and summarize some of the most commonly used terms in Angular. <!-- more --></p>
 
-<p>I&rsquo;m currently working on an Angular.js project here at Code Fellows, and in order to get Angular working with Rails, we need to talk about API&rsquo;s. In that sense, we need to talk about an API versioning strategy. Since this project is small and the only client that will be talking to my backend API is the front-end Angular app, it more or less narrowed down my choices.</p>
+<p>Controller: The controller contains business logic used to populate the scope with functions and values.</p>
 
-<p>Adding a /api_v1/ to my URI is the simplest. While this could be a headache when you are changing versions regularly, it isn&rsquo;t much for me when I am the only client consuming the data. For projects with multiple API consumers, you have to keep multiple versions of the API so you don&rsquo;t break them. In rails, by embedding the api version into the URI, you may end up having a ton of api version controllers, and that can be a pain!</p>
+<p>Scope: Scope is a container of functions and values originally defined in the controller. These functions and values can be binded into the views, within the scoped areas.</p>
 
-<p>In my case, since I am in full controll of both the front-end and the back-end, changing versions and breaking people&rsquo;s projects is not an issue for me. For all I know, I&rsquo;ll be on /api_v1/ for a very long time.</p>
+<p>Directive: Directives are markers placed within the DOM. When a specific directive is activated, it will perform the behaviour that was defined in it. Angular comes with a lot of built-in directives, for example: <code>ng-controller="SomeController"</code> will create a scope defined in SomeController within the nested DOM elements, making those functions and properties available for use. In addition, custom directives can be defined.</p>
+
+<p>Data binding: This is one of Angular&rsquo;s most powerful selling points. Data are synchronized both ways between the views and the models.</p>
+
+<p>Module: Modules are simply containers of code, used for organizational purposes.</p>
+
+<p>Dependency injection: Functions from other models can be transferred to another module via Dependency Injection.</p>
 
 
         <hr class="divider-short"/>
@@ -100,11 +106,9 @@ in
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         
-          <a class="pull-left" href="/blog/2014/10/26/paperclip-with-aws-s3-demo-running-on-rails-4-dot-0-0/" title="Previous Post: Paperclip with AWS S3 demo running on Rails 4.0.0">&laquo; Previous: Paperclip with AWS S3 demo running on Rails 4.0.0</a>
+          <a class="pull-left" href="/blog/2014/10/29/api-versioning-for-the-front-end/" title="Previous Post: API versioning for the front end">&laquo; Previous: API versioning for the front end</a>
         
 
-        
-          <a class="pull-right" href="/blog/2014/11/01/angular-dot-js-vocabs/" title="Next Post: Angular.js vocabs!">Next: Angular.js vocabs! &raquo;</a>
         
       </div>
     </div>
@@ -151,8 +155,8 @@ in
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.ninjacorner.com/blog/2014/10/29/api-versioning-for-the-front-end/';
-        var disqus_url = 'http://blog.ninjacorner.com/blog/2014/10/29/api-versioning-for-the-front-end/';
+        var disqus_identifier = 'http://blog.ninjacorner.com/blog/2014/11/01/angular-dot-js-vocabs/';
+        var disqus_url = 'http://blog.ninjacorner.com/blog/2014/11/01/angular-dot-js-vocabs/';
         var disqus_script = 'embed.js';
       
     (function () {
